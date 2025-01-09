@@ -3,7 +3,7 @@ import '../models/joke_model.dart';
 import '../services/api_services.dart';
 
 class RandomJokeScreen extends StatelessWidget {
-  const RandomJokeScreen({Key? key}) : super(key: key);
+  const RandomJokeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

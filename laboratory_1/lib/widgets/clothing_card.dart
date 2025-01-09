@@ -5,12 +5,12 @@ import '../screens/detail_screen.dart';
 class ClothingCard extends StatelessWidget {
   final ClothingItem item;
 
-  ClothingCard({required this.item});
+  const ClothingCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: ListTile(
         leading: Image.network(item.imageUrl),
         title: Text(item.name),

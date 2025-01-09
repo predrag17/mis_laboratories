@@ -4,13 +4,14 @@ import '../models/clothing_item.dart';
 class DetailScreen extends StatelessWidget {
   final ClothingItem item;
 
-  DetailScreen({required this.item});
+  const DetailScreen({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(item.name,
+            style: const TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
@@ -34,7 +35,7 @@ class DetailScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Text(
                 item.description,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.black87,
                   height: 1.5,
