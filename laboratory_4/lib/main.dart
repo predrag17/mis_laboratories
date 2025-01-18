@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/calendar_screen.dart';
+import 'screens/map_screen.dart'; // Додај ја новата рута
 import 'providers/event_provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => CalendarScreen(),
+          '/': (context) => const CalendarScreen(),
+          '/map': (context) => const MapScreen(),
         },
       ),
     );
