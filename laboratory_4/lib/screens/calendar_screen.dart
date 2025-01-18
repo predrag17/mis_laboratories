@@ -4,8 +4,16 @@ import 'package:provider/provider.dart';
 import '../models/event.dart';
 import '../providers/event_provider.dart';
 
-class CalendarScreen extends StatelessWidget {
+class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
+
+  @override
+  _CalendarScreenState createState() => _CalendarScreenState();
+}
+
+class _CalendarScreenState extends State<CalendarScreen> {
+  DateTime _selectedDay = DateTime.now();
+  List<Event> _selectedEvents = [];
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +27,39 @@ class CalendarScreen extends StatelessWidget {
             focusedDay: DateTime.now(),
             firstDay: DateTime.utc(2020),
             lastDay: DateTime.utc(2030),
+            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
             eventLoader: (day) => events
                 .where((event) =>
                     event.date.day == day.day && event.date.month == day.month)
                 .toList(),
+            onDaySelected: (selectedDay, focusedDay) {
+              setState(() {
+                _selectedDay = selectedDay;
+                _selectedEvents = events
+                    .where((event) =>
+                        event.date.day == selectedDay.day &&
+                        event.date.month == selectedDay.month)
+                    .toList();
+              });
+            },
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: _selectedEvents.isEmpty
+                ? const Center(child: Text('Нема настани за овој ден.'))
+                : ListView.builder(
+                    itemCount: _selectedEvents.length,
+                    itemBuilder: (context, index) {
+                      final event = _selectedEvents[index];
+                      return Card(
+                        child: ListTile(
+                          title: Text(event.title),
+                          subtitle: Text(
+                              'Локација: ${event.location}\nКоординати: (${event.latitude}, ${event.longitude})'),
+                        ),
+                      );
+                    },
+                  ),
           ),
           ElevatedButton(
             onPressed: () {
